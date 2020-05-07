@@ -8,6 +8,7 @@ Room::Room(string title)
 {
     this->title = title;
     this->currentNumberOfDoors = 0;
+    this->items = (Item**)malloc(20 * sizeof(Item*));
 }
 
 void Room::addDoor(Door* aDoor)
@@ -78,4 +79,44 @@ void Room::display()
         cout << tempStudent->getName() << " ";
     }
     cout << "\n";
+}
+
+bool Room::additem(Item* item)
+{
+    if(this->itemCount == 20)
+    {
+        return false;
+    }
+    else
+    {
+        this->items[this->itemCount] = item;
+        this->itemCount++;
+        return true;
+    } 
+}
+
+Item* Room::removeItem(string name)
+{
+    
+    for(int i = 0; i <= 20; i++)
+    {
+        if(name == this->items[i]->getName())
+        {
+            Item* itemToReturn = this->items[i];
+            this->items[i] = 0;
+            this->itemCount--;
+            return itemToReturn;
+        }    
+    }
+}
+
+void Room::displayItems()
+{
+    for(int i = 0; i < 20; i++)
+    {
+        if(this->items[i])
+        {
+            cout << this->items[i]->getName() << "\n";
+        }
+    }
 }

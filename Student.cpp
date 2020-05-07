@@ -35,6 +35,20 @@ bool Student::addItem(Item* anItem)
     } 
 }
 
+Item* Student::dropItem(string name)
+{
+    for(int i = 0; i < currentItemCount; i++)
+    {
+        if(name == this->backpack[i]->getName())
+        {
+            Item* itemToReturn = this->backpack[i];
+            this->backpack[i] = 0;
+            this->currentItemCount--;
+            return itemToReturn;
+        }
+    }
+}
+
 string Student::getName()
 {
     return this->name;

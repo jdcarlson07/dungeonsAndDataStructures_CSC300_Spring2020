@@ -19,6 +19,7 @@ class Student
         Student(string name);
         void displayBackpackContents();
         bool addItem(Item* anItem);
+        Item* dropItem(string name);
         string getName();
         Room* getCurrentRoom();
         void setCurrentRoom(Room* aRoom);

@@ -14,6 +14,8 @@ int main()
     Room* serverRoom = new Room("Server Room");
     Room* esports = new Room("Esports");
     Room* locklairOffice = new Room("Lockair's Office");
+    Item* pencil = new Item("pencil");
+    lobby->additem(pencil);
 
     Door* d1 = new Door("north", serverRoom, "south", lobby);
     Door* d2 = new Door("west", locklairOffice, "east", lobby);
@@ -22,18 +24,31 @@ int main()
     string command = "";
     lobby->addStudent(theStudent);
 
-    Item* chainsaw = new Item("a running chainsaw");
+    Item* chainsaw = new Item("chainsaw");
     theStudent->addItem(chainsaw);
 
     while(command != "quit")
     {
         theStudent->getCurrentRoom()->display();
+        theStudent->getCurrentRoom()->displayItems();
         cout << "Where would you like to go?: ";
         cin >> command; 
 
         if(command == "backpack")
         {
             theStudent->displayBackpackContents();
+        }
+        else if(command == "pickUp")
+        {
+            cin >> command;
+            theStudent->addItem(theStudent->getCurrentRoom()->removeItem(command));
+            cout << "Picked up " << command << "\n";
+        }
+        else if(command == "drop")
+        {
+            cin >> command;
+            theStudent->getCurrentRoom()->additem(theStudent->dropItem(command));
+            cout << "Dropped " << command << "\n";
         }
         else
         {
